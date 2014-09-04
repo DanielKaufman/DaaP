@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "daap"
+        }, 
+        "daap": {
+            "applicationId": "SW1XGiccZpW8ZhunbQJtZnNEM9tkFEVKf22iLONg", 
+            "masterKey": "UxjRwZe5dcCnzE8dgyeoycDwmnihZZM4G6L89LNd"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.19"
+    }
+}
