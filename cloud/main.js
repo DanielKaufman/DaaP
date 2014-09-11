@@ -35,7 +35,15 @@ Parse.Cloud.define("getLink", function(request, response) {
 		var link = object.get("link");
 		alert(link);
 		object.increment("count");
-		object.set("doc_name",object.get("doc_name")+"&"+docName);
+		//object.set("doc_name",object.get("doc_name")+"&"+docName);
+		
+		if (!object.get(docName)) {
+			object.set(docName,1);
+			
+		} else {
+			object.increment(docName);
+		}		
+		
 		alert("count= "+ object.get("count"));
 		object.save();
 		response.success(link);
