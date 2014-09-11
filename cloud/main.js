@@ -11,11 +11,11 @@ Parse.Cloud.define("redirect", function(request, response) {
   response.success("redirect!");
 });
 
-// tourCreated trigger for a when someone creates a Tour object
-Parse.Cloud.define("tourCreated", function(request, response) {
+// addLink trigger for a when someone creates an image-link object
+Parse.Cloud.define("addLink", function(request, response) {
 var TestObject = Parse.Object.extend("redirect_links");
 var testObject = new TestObject();
-testObject.save({name: "pic2", link: "www.facebook.com"}).then(function(object) {
+testObject.save({name: "pic3", link: "www.facebook.com", count:0, docName:""}).then(function(object) {
 	response.success("Hello world!");
   });
 });
@@ -23,6 +23,7 @@ testObject.save({name: "pic2", link: "www.facebook.com"}).then(function(object) 
 Parse.Cloud.define("getLink", function(request, response) {
 	alert("yay! getLink");
 	var name = request.params.name;
+	var docName = request.params.docName;
 	var image = Parse.Object.extend("redirect_links"); 
 	var query = new Parse.Query(image);
 	query.equalTo("name", name);
@@ -33,11 +34,15 @@ Parse.Cloud.define("getLink", function(request, response) {
 		}
 		var link = object.get("link");
 		alert(link);
+		object.increment("count");
+		object.set("doc_name",object.get("doc_name")+"&"+docName);
+		alert("count= "+ object.get("count"));
+		object.save();
 		response.success(link);
 		//return link;
 	}, error: function(object, error) {
 		//alert("Error: " + error.code + " " + error.message);
-		response.success("22222222222222222222222222222");
+		response.success("getLink finished");
 	} });
 });
 

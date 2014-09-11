@@ -10,13 +10,13 @@
 		<script>Parse.initialize("SW1XGiccZpW8ZhunbQJtZnNEM9tkFEVKf22iLONg", "kilJYWVjApuBuGGbgZffdvbmkbc3gtwd9pg2Hl0c");</script>
 		<script> 
 		
-			var parameter = window.location.search.replace( "?", "" ); // will return the GET parameter 
+			var parameter = window.location.search.replace( "?", "" ); // will return the GET parameter
+			parameter = parameter.replace( "&", "=" ); 
 			var values = parameter.split("=");
 			value=values[1]; //the name of the image
-			
-			Parse.Cloud.run("getLink", {name: value}, {
+			value2=values[3] //the name of the pdf
+			Parse.Cloud.run("getLink", {name: value, docName: value2}, {
 			 success: function(result) {
-				//window.alert(result);
 				window.location="http://"+result;
 			 },
 			 error: function(error) {
